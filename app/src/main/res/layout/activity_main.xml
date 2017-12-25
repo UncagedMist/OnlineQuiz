@@ -42,7 +42,6 @@
                         android:textColorHint="@color/colorPrimary"
                         android:textColor="@color/colorPrimary"
                         android:textSize="24sp"
-                        android:text="test1234"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,7 +53,6 @@
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtPassword"
                         android:hint="Password"
-                        android:text="12345678"
                         android:inputType="textPassword"
                         android:textColorHint="@color/colorPrimary"
                         android:textColor="@color/colorPrimary"
