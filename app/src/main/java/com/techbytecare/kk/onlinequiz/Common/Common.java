@@ -15,6 +15,9 @@ public class Common {
     public static String categoryId, categoryName;
     public static User currentUser;
 
+    public static final String USER_KEY = "User";
+    public static final String PWD_KEY = "Password";
+
     public static List<Question> questionList = new ArrayList<>();
 
     public static final String STR_PUSH = "pushNotification";

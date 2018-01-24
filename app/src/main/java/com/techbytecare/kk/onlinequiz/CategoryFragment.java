@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +46,7 @@ public class CategoryFragment extends Fragment {
 
         database = FirebaseDatabase.getInstance();
         categories = database.getReference("Category");
+
     }
 
     @Nullable
@@ -53,8 +56,10 @@ public class CategoryFragment extends Fragment {
 
         listCategory = (RecyclerView)myFragment.findViewById(R.id.listCategory);
         listCategory.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(container.getContext());
-        listCategory.setLayoutManager(layoutManager);
+        //layoutManager = new LinearLayoutManager(container.getContext());
+        //listCategory.setLayoutManager(layoutManager);
+
+        listCategory.setLayoutManager(new GridLayoutManager(getContext(),2));
 
         loadCategories();
 

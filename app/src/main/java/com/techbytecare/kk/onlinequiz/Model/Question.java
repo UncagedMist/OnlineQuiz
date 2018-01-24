@@ -6,12 +6,12 @@ package com.techbytecare.kk.onlinequiz.Model;
 
 public class Question {
 
-    private String Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, IsImageQuestion;
+    private String Question, AnswerA, AnswerB, AnswerC, AnswerD, CorrectAnswer, CategoryId, ImageQuestionText, IsImageQuestion;
 
     public Question() {
     }
 
-    public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String categoryId, String isImageQuestion) {
+    public Question(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer, String categoryId, String imageQuestionText, String isImageQuestion) {
         Question = question;
         AnswerA = answerA;
         AnswerB = answerB;
@@ -19,6 +19,7 @@ public class Question {
         AnswerD = answerD;
         CorrectAnswer = correctAnswer;
         CategoryId = categoryId;
+        ImageQuestionText = imageQuestionText;
         IsImageQuestion = isImageQuestion;
     }
 
@@ -76,6 +77,14 @@ public class Question {
 
     public void setCategoryId(String categoryId) {
         CategoryId = categoryId;
+    }
+
+    public String getImageQuestionText() {
+        return ImageQuestionText;
+    }
+
+    public void setImageQuestionText(String imageQuestionText) {
+        ImageQuestionText = imageQuestionText;
     }
 
     public String getIsImageQuestion() {

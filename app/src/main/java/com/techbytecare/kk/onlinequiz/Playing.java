@@ -18,7 +18,7 @@ import com.techbytecare.kk.onlinequiz.Common.Common;
 public class Playing extends AppCompatActivity implements View.OnClickListener{
 
     final static long INTERVAL = 1000;  //1 sec
-    final static long TIMEOUT = 7000;   //7 sec
+    final static long TIMEOUT = 15000;   //15 sec
 
     int progressValue = 0;
 
@@ -30,7 +30,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
     ImageView question_image;
     Button btnA,btnB,btnC,btnD;
-    TextView txtScore,txtQuestionNum,question_text;
+    TextView txtScore,txtQuestionNum,question_text,image_question_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
         txtQuestionNum = (TextView)findViewById(R.id.txtTotalQuestion);
         question_text = (TextView)findViewById(R.id.question_text);
         question_image = (ImageView)findViewById(R.id.question_image);
+        image_question_text = (TextView)findViewById(R.id.image_question_text);
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
@@ -99,9 +100,11 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
                 //if it is image
                 Picasso.with(getBaseContext()).load(Common.questionList.get(index).getQuestion()).into(question_image);
+                image_question_text.setText(Common.questionList.get(index).getImageQuestionText());
 
                 question_image.setVisibility(View.VISIBLE);
                 question_text.setVisibility(View.INVISIBLE);
+                image_question_text.setVisibility(View.VISIBLE);
             }
             else    {
 
@@ -109,6 +112,7 @@ public class Playing extends AppCompatActivity implements View.OnClickListener{
 
                 question_image.setVisibility(View.INVISIBLE);
                 question_text.setVisibility(View.VISIBLE);
+                image_question_text.setVisibility(View.INVISIBLE);
             }
 
             btnA.setText(Common.questionList.get(index).getAnswerA());

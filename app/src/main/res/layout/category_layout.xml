@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="200dp"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/category_image"
@@ -17,8 +18,9 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:background="#4F0e0d0e"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </RelativeLayout>

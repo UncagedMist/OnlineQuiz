@@ -15,11 +15,15 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.techbytecare.kk.onlinequiz.Common.Common;
 
 import java.util.Random;
+
+import io.paperdb.Paper;
 
 public class Home extends AppCompatActivity {
 
@@ -44,6 +48,12 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Online Quiz");
+        setSupportActionBar(toolbar);
+
+        Paper.init(this);
 
         registrationNotification();
 
@@ -70,6 +80,30 @@ public class Home extends AppCompatActivity {
             }
         });
         setDefaultFragment();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.extra_feature, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.signOut)   {
+
+            //delete remember user and password
+            Paper.book().destroy();
+
+            //logout
+            Intent signOutIntent = new Intent(Home.this,MainActivity.class);
+            signOutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signOutIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void registrationNotification() {
