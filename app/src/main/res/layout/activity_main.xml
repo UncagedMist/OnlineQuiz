@@ -39,7 +39,6 @@
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtUser"
                         android:hint="User Name"
-                        android:text=""
                         android:textColorHint="@color/colorPrimary"
                         android:textColor="@color/colorPrimary"
                         android:textSize="24sp"
@@ -54,7 +53,6 @@
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/edtPassword"
                         android:hint="Password"
-                        android:text=""
                         android:inputType="textPassword"
                         android:textColorHint="@color/colorPrimary"
                         android:textColor="@color/colorPrimary"

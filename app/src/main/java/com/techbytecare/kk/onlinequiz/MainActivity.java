@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +33,12 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
 
-    MaterialEditText edtNewUser,edtNewPassword,edtNewEmail;
+    MaterialEditText edtNewUser,edtNewPassword,edtNewEmail,edtSecureCode;
     MaterialEditText edtUser,edtPassword;
 
     CheckBox ckbRemember;
+
+    TextView txtForgotPwd;
 
     Button btnSignUp,btnSignIn;
 
@@ -60,8 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
         ckbRemember = (CheckBox) findViewById(R.id.ckbRemember);
 
+        txtForgotPwd = (TextView)findViewById(R.id.txtForgotPwd);
+
         //init paper
         Paper.init(this);
+
+        txtForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showForgotPasswordDialog();
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +102,54 @@ public class MainActivity extends AppCompatActivity {
             if (!user.isEmpty() && !pwd.isEmpty())
                 login(user,pwd);
         }
+    }
+
+    private void showForgotPasswordDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Forgot Password");
+        builder.setMessage("Enter Your Secure Code");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View forgot_view = inflater.inflate(R.layout.forgot_password,null);
+
+        builder.setView(forgot_view);
+        builder.setIcon(R.drawable.ic_security_black_24dp);
+
+        final MaterialEditText edtUserName = (MaterialEditText)forgot_view.findViewById(R.id.edtUserName);
+        final MaterialEditText edtSecureCode = (MaterialEditText)forgot_view.findViewById(R.id.txtSecureCode);
+
+        builder.setPositiveButton("SHOW", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                users.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        User user = dataSnapshot.child(edtUserName.getText().toString()).getValue(User.class);
+
+                        if (user.getSecureCode().equals(edtSecureCode.getText().toString())) {
+                            Toast.makeText(MainActivity.this, "Your Password : " + user.getPassword(), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Wrong Secure-Code!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 
     private void login(final String user, final String pwd) {
@@ -223,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
         edtNewEmail = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewEmail);
         edtNewUser = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewUserName);
         edtNewPassword = (MaterialEditText)sign_up_layout.findViewById(R.id.edtNewPassword);
+        edtSecureCode = (MaterialEditText)sign_up_layout.findViewById(R.id.edtSecureCode);
 
         alertDialog.setView(sign_up_layout);
         alertDialog.setIcon(R.drawable.ic_account_circle_black_24dp);
@@ -240,7 +301,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int which) {
                 final User user = new User(edtNewUser.getText().toString(),
                         edtNewPassword.getText().toString(),
-                        edtNewEmail.getText().toString());
+                        edtNewEmail.getText().toString(),
+                        edtSecureCode.getText().toString());
 
                 users.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

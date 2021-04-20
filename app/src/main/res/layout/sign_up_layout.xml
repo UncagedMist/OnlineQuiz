@@ -54,6 +54,20 @@
             app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true"/>
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtSecureCode"
+            android:hint="Secure Code To Recover Password"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"/>
+
 
     </LinearLayout>
 
